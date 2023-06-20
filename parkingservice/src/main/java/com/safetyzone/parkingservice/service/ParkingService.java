@@ -2,9 +2,9 @@ package com.safetyzone.parkingservice.service;
 
 import com.safetyzone.parkingservice.component.ParkingComponent;
 import com.safetyzone.parkingservice.domain.SlotBookRequestDto;
-import com.safetyzone.parkingservice.domain.SlotInfoResponseDto;
 import com.safetyzone.parkingservice.domain.SlotBookResponseDto;
 import com.safetyzone.parkingservice.domain.SlotInfoRequestDto;
+import com.safetyzone.parkingservice.domain.SlotInfoResponseDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +24,7 @@ public class ParkingService {
 
     /**
      * Method to book parking slot
-     * @param car
+     * @param car  {@link SlotBookRequestDto} contains car registration number
      * @return SlotBookResponseDto
      */
     public SlotBookResponseDto parkCar(SlotBookRequestDto car) {
@@ -33,7 +33,7 @@ public class ParkingService {
 
     /**
      * Method get parking slot information, also with history of the slot
-     * @param slot
+     * @param slot {@link SlotInfoRequestDto} contains slotId and optional history value
      * @return SlotInfoResponseDto
      */
     public SlotInfoResponseDto getSlotInfo(SlotInfoRequestDto slot) {
@@ -42,7 +42,7 @@ public class ParkingService {
 
     /**
      * Endpoint to unpark from parking car
-     * @param car
+     * @param car {@link SlotBookRequestDto} contains car registration number
      * @return SlotBookResponseDto
      */
     public SlotBookResponseDto unParkCar(SlotBookRequestDto car) {

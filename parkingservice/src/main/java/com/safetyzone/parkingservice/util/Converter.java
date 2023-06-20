@@ -9,7 +9,8 @@ import com.safetyzone.parkingservice.entity.SlotBookRecord;
 
 public class Converter {
 
-    public static ObjectMapper mapper = new ObjectMapper();
+    private Converter(){}
+    public static final ObjectMapper mapper = new ObjectMapper();
     public static SlotInfoResponseDto convertToDto(Slot slot) {
         return mapper.convertValue(slot, new TypeReference<>() {
         });

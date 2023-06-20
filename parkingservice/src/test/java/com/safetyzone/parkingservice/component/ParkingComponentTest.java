@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ParkingComponentTest {
+class ParkingComponentTest {
 
     @InjectMocks
     ParkingComponent parkingComponent;
@@ -49,7 +49,7 @@ public class ParkingComponentTest {
     ArgumentCaptor<Boolean> historyFlagCaptor;
 
     @Test
-    public void test_parkCar_alreadyParked() {
+    void test_parkCar_alreadyParked() {
 
         String carRegNum = "CA12AH3232";
         SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color("red").build();
@@ -61,7 +61,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_parkCar_noAvailableSpot() {
+    void test_parkCar_noAvailableSpot() {
 
         String carRegNum = "CA12AH3232";
         String color = "red";
@@ -77,7 +77,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_parkCar_parkSuccess() {
+    void test_parkCar_parkSuccess() {
 
         String carRegNum = "CA12AH3232";
         String color = "red";
@@ -95,7 +95,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_getSlotInfo_invalidSlot() {
+    void test_getSlotInfo_invalidSlot() {
 
         SlotInfoRequestDto slotBookRequestDto = SlotInfoRequestDto.builder().slotId(1).build();
         when(slotRepository.findById(slotBookRequestDto.getSlotId())).thenReturn(Optional.empty());
@@ -103,7 +103,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_getSlotInfo_validSlot() {
+    void test_getSlotInfo_validSlot() {
 
         String carRegNum = "CA12AH3232";
         String color = "red";
@@ -118,7 +118,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_unParkCar_Error() {
+    void test_unParkCar_Error() {
 
         String carRegNum = "CA12AH3232";
         String color = "red";
@@ -131,7 +131,7 @@ public class ParkingComponentTest {
     }
 
     @Test
-    public void test_unParkCar_Success() {
+    void test_unParkCar_Success() {
 
         String carRegNum = "CA12AH3232";
         String color = "red";

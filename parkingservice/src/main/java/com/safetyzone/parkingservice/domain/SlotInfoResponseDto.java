@@ -11,6 +11,11 @@ import lombok.AccessLevel;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Response DTO class containing parking slot information also with optional history of the slot
+ * @author Aurobindo.Parida
+ * @since 06/20/2023
+ */
 @Builder
 @Getter
 @Setter
@@ -19,9 +24,7 @@ import java.util.List;
 @JsonInclude(value= JsonInclude.Include.NON_EMPTY, content= JsonInclude.Include.NON_NULL)
 public class SlotInfoResponseDto implements Serializable {
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    public static final Long serialVersionId = 1L;
+    public static final Long serialVersionUID = 1L;
     Integer slotId;
     String location;
     List<SlotBookResponseDto> carsList;

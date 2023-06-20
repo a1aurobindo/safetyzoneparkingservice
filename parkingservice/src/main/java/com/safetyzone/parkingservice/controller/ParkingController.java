@@ -31,7 +31,7 @@ public class ParkingController {
 
     /**
      * Endpoint to get parking slot information, also with history of the slot
-     * @param slot
+     * @param slot slot request
      * @return SlotInfoResponseDto
      */
     @GetMapping("/slot")
@@ -46,7 +46,7 @@ public class ParkingController {
 
     /**
      * Endpoint to book parking slot
-     * @param car
+     * @param car car park request object contains car registration number
      * @return SlotBookResponseDto
      */
     @PostMapping("/park")
@@ -72,7 +72,6 @@ public class ParkingController {
         try {
             return parkingService.unParkCar(car);
         } catch(CarNotPresentInParkingException exception) {
-            System.out.println(exception.getMessage());
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, exception.getMessage(), exception);
         } catch(ParkingException exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);

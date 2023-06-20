@@ -6,6 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
+/**
+ * Repository for the booking parking slot
+ * @author Aurobindo.Parida
+ * @since 06/20/2023
+ *
+ */
 @Repository
 public interface SlotCarRepository extends JpaRepository<SlotBookRecord, String> {
 

@@ -6,10 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
 import lombok.Builder;
-import lombok.AccessLevel;
 
 import java.io.Serializable;
 
+/**
+ * Request DTO class for booking a parking slot containing a car registration number and optional car color
+ * @author Aurobindo.Parida
+ * @since 06/20/2023
+ */
 @Builder
 @Getter
 @Setter
@@ -18,9 +22,7 @@ import java.io.Serializable;
 @JsonInclude(value= JsonInclude.Include.NON_EMPTY, content= JsonInclude.Include.NON_NULL)
 public class SlotBookRequestDto implements Serializable {
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    public static final Long serialVersionId = 1L;
+    public static final Long serialVersionUID = 1L;
     String carRegNum;
     String color;
 }

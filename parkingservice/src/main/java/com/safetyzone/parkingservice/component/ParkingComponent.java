@@ -52,11 +52,11 @@ public class ParkingComponent {
     public SlotBookResponseDto parkCar(SlotBookRequestDto car) {
 
         slotCarRepository.findByCarRegNumAndActive(car.getCarRegNum(), true).stream()
-            .findFirst().ifPresent((carDto) -> {
+            .findFirst().ifPresent(carDto -> {
                 throw new CarAlreadyParkedException(ALREADY_PARKED);
             });
         Slot avSlot = slotRepository.findAll().stream()
-            .filter((slot) -> CollectionUtils.isEmpty(slot.getCarsList().stream()
+            .filter(slot -> CollectionUtils.isEmpty(slot.getCarsList().stream()
                 .filter(book -> book.isActive()).collect(Collectors.toList())))
             .findFirst()
             .orElseThrow(() -> new SlotUnavailableException(NO_AVAILABLE_SLOTS));
@@ -67,9 +67,8 @@ public class ParkingComponent {
             .active(true)
             .parkedDate(new Date())
             .color(car.getColor()).build();
-        SlotBookResponseDto responseDto = Converter.convertToDto(slotCarRepository.saveAndFlush(slotBookRec));
 
-        return responseDto;
+        return Converter.convertToDto(slotCarRepository.saveAndFlush(slotBookRec));
     }
 
     /**
@@ -108,8 +107,7 @@ public class ParkingComponent {
         slotBookRec.setActive(false);
         slotBookRec.setUnParkedDate(new Date());
         slotCarRepository.save(slotBookRec);
-        SlotBookResponseDto responseDto = Converter.convertToDto(slotBookRec);
 
-        return responseDto;
+        return Converter.convertToDto(slotBookRec);
     }
 }

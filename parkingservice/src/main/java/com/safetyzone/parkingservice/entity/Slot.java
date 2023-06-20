@@ -6,6 +6,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Entity class containing slot record
+ * @author Aurobindo.Parida
+ * @since 06/20/2023
+ */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

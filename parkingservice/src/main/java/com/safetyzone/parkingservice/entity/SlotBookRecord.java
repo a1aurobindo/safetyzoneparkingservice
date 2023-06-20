@@ -7,6 +7,11 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Entity class containing slot book record
+ * @author Aurobindo.Parida
+ * @since 06/20/2023
+ */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
