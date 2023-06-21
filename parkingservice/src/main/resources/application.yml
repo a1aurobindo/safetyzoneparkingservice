@@ -43,9 +43,9 @@ aws:
     redirect-uri: ${COGNITO-CLIENT-REDIRECT-URI}
 
 bucket:
-  capacity: ${BUCKET-CAPACITY}
-  token-size: ${BUCKET-TOKEN-SIZE}
-  refill-interval: ${BUCKET-REFILL-INTERVAL}
+  capacity: ${RATE-LIMITER-CAPACITY}
+  token-size: ${RATE-LIMITER-TOKEN-SIZE}
+  refill-interval: ${RATE-LIMITER-REFILL-INTERVAL}
 
 parking:
   lot-size: ${PARKING-LOT-SIZE}
