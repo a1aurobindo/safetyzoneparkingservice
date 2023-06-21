@@ -10,7 +10,7 @@ Platform Reference
 
 ### Run Locally
 
-#### The .env file contains information regarding cognito client, the slot size, rate limiter configurations, server port.
+#### The .env file contains information regarding cognito client, the slot size, rate limiter configurations, server port, I will remove the secrets from this once testing is done
 
 The following guides illustrate how to run the service locally
 
@@ -28,8 +28,8 @@ The following guides illustrate how to run the service locally
 
 ## Resource Endpoints
 
-* **/park** [**POST**] takes body of type json in { carRegNum: string, color: string (optional)} format
-* **/unpark** [**PUT**] takes body type json in { carRegNum: string, color: string (optional)} format
+* **/park** [**POST**] takes body of type json in { carRegNum: string} format
+* **/unpark** [**PUT**] takes body type json in { carRegNum: string} format
 * **/slot** [**GET**] takes request parameters slotId (Integer) and history (Boolean , ooptional)
 
 #### Open postman, create a request
