@@ -34,23 +34,24 @@ The following guides illustrate how to run the service locally
 
 #### Open postman, create a request
 ### Park a car
-* Add url http://localhost:8080/park
+* Add url http://localhost:8080/parking/park
 * Set Method type to **POST**
 * Add in the body {"carRegNum": "CA 12 2345"}
 * Add an **Authorization** header with value in **Bearer <access_token>** format
 * Send
 
 ### Unpark a car
-* Add url http://localhost:8080/unpark
+* Add url http://localhost:8080/parking/unpark
 * Set Method type to **PUT**
 * Add in the body {"carRegNum": "CA 12 2345"}
 * Add an **Authorization** header with value in **Bearer <access_token>** format
 * Send
 
 ### Get Parking slot information
-* Add url http://localhost:8080/slot?slotId=1&history=true
+* Add url http://localhost:8080/parking/slot?slotId=1&history=true
 * Set Method type to **GET**
 * Add an **Authorization** header with value in **Bearer <access_token>** format
+* The **slotId** values are natural numbers
 * Send
 
 # Note
