@@ -1,14 +1,17 @@
 package com.safetyzone.parkingservice.controller;
 
 import com.safetyzone.parkingservice.domain.SlotBookRequestDto;
-import com.safetyzone.parkingservice.domain.SlotInfoResponseDto;
 import com.safetyzone.parkingservice.domain.SlotBookResponseDto;
 import com.safetyzone.parkingservice.domain.SlotInfoRequestDto;
+import com.safetyzone.parkingservice.domain.SlotInfoResponseDto;
 import com.safetyzone.parkingservice.exception.CarAlreadyParkedException;
 import com.safetyzone.parkingservice.exception.CarNotPresentInParkingException;
 import com.safetyzone.parkingservice.exception.ParkingException;
 import com.safetyzone.parkingservice.exception.SlotUnavailableException;
 import com.safetyzone.parkingservice.service.ParkingService;
+import io.github.bucket4j.Bucket;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,14 +22,23 @@ import org.springframework.web.server.ResponseStatusException;
  * @since 06/20/2023
  *
  */
+@Tag(name = "Parking")
 @RestController
 @RequestMapping("/parking")
 public class ParkingController {
 
     private ParkingService parkingService;
 
-    public ParkingController(ParkingService parkingService) {
+    private Bucket bucket;
+
+    /**
+     * Constructor with defining a rete limit for calling the park endpoint
+     * @param parkingService
+     * @param bucket rate limiter
+     */
+    public ParkingController(ParkingService parkingService, Bucket bucket) {
         this.parkingService = parkingService;
+        this.bucket = bucket;
     }
 
     /**
@@ -34,6 +46,7 @@ public class ParkingController {
      * @param slot slot request
      * @return SlotInfoResponseDto
      */
+    @Operation(description = "This method is used to get the information about a parkng slot")
     @GetMapping("/slot")
     public SlotInfoResponseDto getSlotInfo(SlotInfoRequestDto slot) {
 
@@ -50,15 +63,18 @@ public class ParkingController {
      * @return SlotBookResponseDto
      */
     @PostMapping("/park")
+    @Operation(description = "This method is used to park a car at a slot")
     public SlotBookResponseDto parkCar(@RequestBody SlotBookRequestDto car) {
-
-        try {
-            return parkingService.parkCar(car);
-        } catch(CarAlreadyParkedException exception) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, exception.getMessage(), exception);
-        } catch(SlotUnavailableException exception) {
-            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, exception.getMessage(), exception);
+        if (bucket.tryConsume(1)) {
+            try {
+                return parkingService.parkCar(car);
+            } catch (CarAlreadyParkedException exception) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, exception.getMessage(), exception);
+            } catch (SlotUnavailableException exception) {
+                throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, exception.getMessage(), exception);
+            }
         }
+        throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
     }
 
     /**
@@ -67,6 +83,7 @@ public class ParkingController {
      * @return SlotBookResponseDto
      */
     @PutMapping("/unpark")
+    @Operation(description = "This method is used to unpark a car at a slot")
     public SlotBookResponseDto unpark(@RequestBody SlotBookRequestDto car) {
 
         try {

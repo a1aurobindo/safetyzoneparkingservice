@@ -65,8 +65,7 @@ public class ParkingComponent {
             .carRegNum(car.getCarRegNum())
             .slotId(avSlot.getSlotId())
             .active(true)
-            .parkedDate(new Date())
-            .color(car.getColor()).build();
+            .parkedDate(new Date()).build();
 
         return Converter.convertToDto(slotCarRepository.saveAndFlush(slotBookRec));
     }
@@ -103,7 +102,7 @@ public class ParkingComponent {
             .orElseThrow(() -> new CarNotPresentInParkingException(CAR_NOT_PARKED));
         Optional.ofNullable(slotBookRec.getSlot()).stream()
             .findFirst()
-            .orElseThrow(() -> new ParkingException(SYSTEM_ERROR));
+            .orElseThrow(() -> new ParkingException(SYSTEM_ERROR)).getSlotId();
         slotBookRec.setActive(false);
         slotBookRec.setUnParkedDate(new Date());
         slotCarRepository.save(slotBookRec);

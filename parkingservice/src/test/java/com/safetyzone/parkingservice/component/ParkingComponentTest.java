@@ -52,8 +52,8 @@ class ParkingComponentTest {
     void test_parkCar_alreadyParked() {
 
         String carRegNum = "CA12AH3232";
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color("red").build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(1).color("red").carRegNum(carRegNum).build();
+        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(1).carRegNum(carRegNum).build();
 
         when(slotCarRepository.findByCarRegNumAndActive(carRegNum, true)).thenReturn(Optional.of(slotCar));
 
@@ -66,8 +66,8 @@ class ParkingComponentTest {
         String carRegNum = "CA12AH3232";
         String color = "red";
         Integer slotId = 1;
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color(color).build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).color(color).active(true).carRegNum(carRegNum).build();
+        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).active(true).carRegNum(carRegNum).build();
         Slot slot = Slot.builder().slotId(slotId).location("NE").carsList(Arrays.asList(slotCar)).build();
 
         when(slotCarRepository.findByCarRegNumAndActive(carRegNum, true)).thenReturn(Optional.empty());
@@ -82,8 +82,8 @@ class ParkingComponentTest {
         String carRegNum = "CA12AH3232";
         String color = "red";
         Integer slotId = 1;
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color(color).build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).color(color).carRegNum(carRegNum).build();
+        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
         Slot slot = Slot.builder().slotId(slotId).location("NE").carsList(new ArrayList<>()).build();
 
         when(slotCarRepository.findByCarRegNumAndActive(carRegNum, true)).thenReturn(Optional.empty());
@@ -109,7 +109,7 @@ class ParkingComponentTest {
         String color = "red";
         Integer slotId = 1;
         SlotInfoRequestDto slotBookRequestDto = SlotInfoRequestDto.builder().slotId(slotId).history(false).build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).color(color).carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
         Slot slot = Slot.builder().slotId(slotId).location("NE").carsList(Arrays.asList(slotCar)).build();
 
         when(slotRepository.findById(slotBookRequestDto.getSlotId())).thenReturn(Optional.of(slot));
@@ -122,8 +122,8 @@ class ParkingComponentTest {
 
         String carRegNum = "CA12AH3232";
         String color = "red";
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color(color).build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().color(color).carRegNum(carRegNum).build();
+        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().carRegNum(carRegNum).build();
 
         when(slotCarRepository.findByCarRegNumAndActive(carRegNum, true)).thenReturn(Optional.of(slotCar));
 
@@ -136,8 +136,8 @@ class ParkingComponentTest {
         String carRegNum = "CA12AH3232";
         String color = "red";
         Integer slotId = 1;
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).color(color).build();
-        SlotBookRecord slotCar = SlotBookRecord.builder().color(color).slotId(slotId).carRegNum(carRegNum).build();
+        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
+        SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
         Slot slot = Slot.builder().slotId(slotId).location("NE").carsList(Arrays.asList(slotCar)).build();
         slotCar.setSlot(slot);
 

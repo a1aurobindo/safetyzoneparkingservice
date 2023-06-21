@@ -29,9 +29,6 @@ public class SlotBookRecord {
     private String carRegNum;
 
     @Column
-    private String color;
-
-    @Column
     private Integer slotId;
 
     @Column

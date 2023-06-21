@@ -21,7 +21,6 @@ public class SlotBookResponseDto implements Serializable {
 
     public static final Long serialVersionUID = 1L;
     String carRegNum;
-    String color;
     Integer slotId;
     Boolean active;
     Date parkedDate;

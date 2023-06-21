@@ -24,5 +24,4 @@ public class SlotBookRequestDto implements Serializable {
 
     public static final Long serialVersionUID = 1L;
     String carRegNum;
-    String color;
 }
