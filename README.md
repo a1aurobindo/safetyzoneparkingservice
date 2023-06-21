@@ -21,8 +21,8 @@ The following guides illustrate how to run the service locally
 ## Authentication & Authorization
 
 * Open http://localhost:8080/token in a browser
-* A page with aws cognito login page will come up
-* put username and password and sign in
+* AWS cognito login page will come up
+* put username as aurobindo and password as Pass1234!@ and sign in
 * It will get back list of tokens
 * Copy the access_token value
 
