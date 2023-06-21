@@ -6,7 +6,7 @@ Platform Reference
 
 * Java version: 11
 * SpringBoot version: 2.7.10
-* Maven Version: 3.6.3
+* Maven Version: 3.8.1
 
 ### Run Locally
 
