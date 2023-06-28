@@ -45,8 +45,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain resourceFilterChain(HttpSecurity http) throws Exception {
 
-        http.antMatcher("/parking/*").authorizeHttpRequests(requests -> requests.requestMatchers(
-                new RequestHeaderRequestMatcher("Authorization")).authenticated())
+        http.antMatcher("/parking/*").authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
             .cors().and()
             .csrf(withDefaults())
             .oauth2ResourceServer(resourceServer -> resourceServer.jwt());
