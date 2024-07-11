@@ -59,7 +59,7 @@ public class AuthController {
         map.add("grant_type", client.getAuthorizationGrantType().getValue());
         map.add("code", authDto.getCode());
 
-        HttpEntity<MultiValueMap> request = new HttpEntity<>(map, headers);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
         ResponseEntity<AuthTokenDto> resp;
         resp = restTemplate.postForEntity(client.getProviderDetails().getTokenUri(),
             request, AuthTokenDto.class);

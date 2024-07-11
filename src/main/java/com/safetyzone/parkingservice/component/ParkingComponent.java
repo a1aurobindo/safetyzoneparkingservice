@@ -16,7 +16,7 @@ import com.safetyzone.parkingservice.util.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Optional;

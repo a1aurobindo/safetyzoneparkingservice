@@ -1,12 +1,10 @@
 package com.safetyzone.parkingservice.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -20,7 +18,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * @author Aurobindo.Parida
  * @since 6/21/2023
  */
-@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -28,15 +25,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain clientFilterChain(HttpSecurity http) throws Exception {
 
-        http.requestMatchers().antMatchers("/token", "/oauth2/authorization/cognito")
-            .and()
+        http.authorizeHttpRequests(req -> req.requestMatchers("/token", "/oauth2/authorization/cognito"))
             .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
-            .cors().and()
+            .cors(withDefaults())
             .csrf(withDefaults())
-            .oauth2Login()
-            .and()
-            .logout()
-            .logoutSuccessUrl("/");
+            .oauth2Login(withDefaults())
+            .logout(logoutconfig -> logoutconfig.logoutSuccessUrl("/"));
         return http.build();
     }
 
@@ -45,10 +39,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain resourceFilterChain(HttpSecurity http) throws Exception {
 
-        http.antMatcher("/parking/*").authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
-            .cors().and()
+        http.authorizeHttpRequests(req -> req.requestMatchers("/parking/*"))
+            .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
+            .cors(withDefaults())
             .csrf(withDefaults())
-            .oauth2ResourceServer(resourceServer -> resourceServer.jwt());
+            .oauth2ResourceServer(resourceServer -> resourceServer.jwt(withDefaults()));
         return http.build();
     }
 

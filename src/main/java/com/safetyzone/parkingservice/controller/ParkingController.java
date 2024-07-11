@@ -8,6 +8,7 @@ import com.safetyzone.parkingservice.exception.CarAlreadyParkedException;
 import com.safetyzone.parkingservice.exception.CarNotPresentInParkingException;
 import com.safetyzone.parkingservice.exception.ParkingException;
 import com.safetyzone.parkingservice.exception.SlotUnavailableException;
+import com.safetyzone.parkingservice.service.EmailService;
 import com.safetyzone.parkingservice.service.ParkingService;
 import io.github.bucket4j.Bucket;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,14 +32,17 @@ public class ParkingController {
 
     private Bucket bucket;
 
+    private EmailService emailService;
+
     /**
      * Constructor with defining a rete limit for calling the park endpoint
      * @param parkingService
      * @param bucket rate limiter
      */
-    public ParkingController(ParkingService parkingService, Bucket bucket) {
+    public ParkingController(ParkingService parkingService, Bucket bucket, EmailService emailService) {
         this.parkingService = parkingService;
         this.bucket = bucket;
+        this.emailService = emailService;
     }
 
     /**
@@ -93,5 +97,13 @@ public class ParkingController {
         } catch(ParkingException exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
         }
+    }
+
+    @GetMapping("/sendemail")
+    public void sendEmail() {
+        String to = "a1aurobindo@live.in";
+        String subject = "test";
+        String body = "testing email feature";
+        this.emailService.sendEmail(to, subject, body);
     }
 }

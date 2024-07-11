@@ -2,7 +2,6 @@ package com.safetyzone.parkingservice.repository;
 
 import com.safetyzone.parkingservice.entity.SlotBookRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -13,7 +12,6 @@ import java.util.Optional;
  * @since 06/20/2023
  *
  */
-@Repository
 public interface SlotCarRepository extends JpaRepository<SlotBookRecord, String> {
 
     Optional<SlotBookRecord> findByCarRegNumAndActive(String carRegNum, boolean active);

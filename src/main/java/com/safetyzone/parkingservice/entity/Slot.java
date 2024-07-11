@@ -3,7 +3,7 @@ package com.safetyzone.parkingservice.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 /**

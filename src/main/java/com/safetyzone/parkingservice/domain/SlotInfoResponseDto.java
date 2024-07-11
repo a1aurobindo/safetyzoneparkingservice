@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
 import lombok.Builder;
-import lombok.AccessLevel;
 
 import java.io.Serializable;
 import java.util.List;

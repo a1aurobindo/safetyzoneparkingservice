@@ -1,7 +1,6 @@
 package com.safetyzone.parkingservice.component;
 
 import com.safetyzone.parkingservice.domain.SlotBookRequestDto;
-import com.safetyzone.parkingservice.domain.SlotBookResponseDto;
 import com.safetyzone.parkingservice.domain.SlotInfoRequestDto;
 import com.safetyzone.parkingservice.entity.Slot;
 import com.safetyzone.parkingservice.entity.SlotBookRecord;
@@ -17,6 +16,8 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +65,6 @@ class ParkingComponentTest {
     void test_parkCar_noAvailableSpot() {
 
         String carRegNum = "CA12AH3232";
-        String color = "red";
         Integer slotId = 1;
         SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
         SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).active(true).carRegNum(carRegNum).build();
@@ -80,15 +80,12 @@ class ParkingComponentTest {
     void test_parkCar_parkSuccess() {
 
         String carRegNum = "CA12AH3232";
-        String color = "red";
         Integer slotId = 1;
-        SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
         SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
         Slot slot = Slot.builder().slotId(slotId).location("NE").carsList(new ArrayList<>()).build();
 
         when(slotCarRepository.findByCarRegNumAndActive(carRegNum, true)).thenReturn(Optional.empty());
         when(slotRepository.findAll()).thenReturn(Arrays.asList(slot));
-        SlotBookResponseDto resp = parkingComponent.parkCar(slotBookRequestDto);
 
         verify(slotCarRepository).saveAndFlush(slotCarArgumentCaptor.capture());
         assertEquals(slotCar.getSlotId(), slotCarArgumentCaptor.getValue().getSlotId());
@@ -106,7 +103,6 @@ class ParkingComponentTest {
     void test_getSlotInfo_validSlot() {
 
         String carRegNum = "CA12AH3232";
-        String color = "red";
         Integer slotId = 1;
         SlotInfoRequestDto slotBookRequestDto = SlotInfoRequestDto.builder().slotId(slotId).history(false).build();
         SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
@@ -121,7 +117,6 @@ class ParkingComponentTest {
     void test_unParkCar_Error() {
 
         String carRegNum = "CA12AH3232";
-        String color = "red";
         SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
         SlotBookRecord slotCar = SlotBookRecord.builder().carRegNum(carRegNum).build();
 
@@ -134,7 +129,6 @@ class ParkingComponentTest {
     void test_unParkCar_Success() {
 
         String carRegNum = "CA12AH3232";
-        String color = "red";
         Integer slotId = 1;
         SlotBookRequestDto slotBookRequestDto = SlotBookRequestDto.builder().carRegNum(carRegNum).build();
         SlotBookRecord slotCar = SlotBookRecord.builder().slotId(slotId).carRegNum(carRegNum).build();
